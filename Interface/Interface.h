@@ -2,6 +2,8 @@
 #define _INTERFACE_H
 
 #include <iostream>
+#include "../Registers/Registers.h"
+#include "../Memory/Memory.h"
 
 using namespace std;
 

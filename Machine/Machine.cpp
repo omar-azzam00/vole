@@ -3,11 +3,13 @@
 
 using namespace std;
 
+Machine::Machine() {}
+
 void Machine::runMachine()
 {
+    interface.showBanner();
     while (true)
     {
-        interface.showBanner();
         string instructionsStr = interface.readFile();
         string screenOutput;
 

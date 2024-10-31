@@ -12,14 +12,15 @@ using namespace std;
 class Machine
 {
 private:
-    u_int8_t PC;
-    u_int16_t IR; 
-    Registers &registers;
-    Memory &memory;
-    Executor &executor;
-    Interface &interface;
+    u_int8_t PC = 0;
+    u_int16_t IR;
+    Registers registers;
+    Memory memory;
+    Executor executor;
+    Interface interface;
 
 public:
+    Machine();
     void runMachine();
 };
 

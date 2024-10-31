@@ -47,52 +47,56 @@ void Interface::showBanner()
 
 string Interface::readFile()
 {
-    string filename;
-    string instruction;
-
-    cout << "Enter the name of the instructions file: ";
-
-    // cin >> filename;
-    getline(cin, filename);
-    // Omar: getline is better because user might enter space seperated text.
-
     ifstream infile;
-    infile.open(filename);
+    string instruction = "";
+    string filename;
 
-    if (!infile)
+    while (true)
     {
-        cout << "This file can't be opened, please try again!\n";
-        readFile();
+
+        cout << "Enter the name of the instructions file: ";
+
+        // cin >> filename;
+        getline(cin, filename);
+        // Omar: getline is better because user might enter space seperated text.
+
+        infile.open(filename);
+
+        if (!infile)
+        {
+            cout << "This file can't be opened, please try again!\n";
+            continue;
+        }
+
+        cout << endl;
+
+        // string line;
+
+        // while (getline(infile, line))
+        // {
+        //     instruction += line;
+        // }
+
+        // Omar: The previous while loop will not add new line characters to the string.
+        char c;
+
+        while (infile.get(c))
+        {
+            instruction += c;
+        }
+
+        // Omar: we don't want to print the instructions we read.
+        // cout << instruction;
+
+        infile.close();
+
+        return instruction;
     }
-
-    cout << endl;
-
-    // string line;
-
-    // while (getline(infile, line))
-    // {
-    //     instruction += line;
-    // }
-
-    // Omar: The previous while loop will not add new line characters to the string.
-    char c;
-
-    while (infile.get(c))
-    {
-        instruction += c;
-    }
-
-    // Omar: we don't want to print the instructions we read.
-    // cout << instruction;
-
-    infile.close();
-
-    return instruction;
 }
 
-bool askIfWrite()
+bool Interface::askIfWrite()
 {
-    cout << "Do you want to see screen output and machine status ?\n";
+    cout << "Do you want to see screen output and machine status of this program ?\n";
 
     while (true)
     {
@@ -105,7 +109,7 @@ bool askIfWrite()
             cout << endl;
             return true;
         }
-        else if (tolower(choice[0] == 'n'))
+        else if (tolower(choice[0]) == 'n')
         {
             cout << endl;
             return false;
@@ -121,42 +125,51 @@ void Interface::writeOutput(string &screenOutput, u_int8_t &PC, u_int16_t &IR, R
 {
     cout << setfill('=');
 
-    cout << setw(64) << " SCREEN OUTPUT " << '\n';
+    cout << setw(32) << " SCREEN OUTPUT " << setw(32) << '=' << '\n';
     cout << screenOutput;
     if (screenOutput[screenOutput.length() - 1] != '\n')
     {
         cout << '\n';
     }
-    cout << setw(64) << '=' << endl;
+    cout << setw(64) << '=' << "\n"
+         << endl;
 
-    cout << setw(64) << " REGISTERS STATE " << '\n';
-    cout << "PC: " << hex << PC << ", " << "IR: " << IR << ", ";
+    cout << setw(32) << " REGISTERS STATE " << setw(32) << '=' << '\n';
+
+    cout << setfill(' ') << "PC " << ": 0x" << hex << (int)PC << "\n"
+         << "IR " << ": 0x" << IR << "\n"
+         << left;
     for (int i = 0; i < REGISTERS_COUNT; i++)
     {
-        cout << "R" << dec << i << ": " << hex << (int)registers.getValue(i);
+        cout << "R" << dec << setw(2) << i << ": " << hex << "0x" << (int)registers.getValue(i);
         if (i != REGISTERS_COUNT - 1)
         {
-            cout << ", ";
+            cout << "\n";
         }
     }
     cout << '\n'
-         << setw(64) << '=' << endl;
+         << right
+         << setfill('=')
+         << setw(64) << '=' << "\n"
+         << endl;
 
-    cout << setw(64) << " MEMORY STATE " << '\n';
+    cout << setw(32) << " MEMORY STATE " << setw(32) << '=' << '\n'
+         << setfill(' ') << left;
     for (int i = 0; i < MEMORY_COUNT; i++)
     {
-        cout << "Addr " << hex << i << ": " << (int)memory.getValue(i);
+        cout << "Addr 0x" << setw(2) << hex << i << ": " << "0x" << (int)memory.getValue(i);
         if (i != MEMORY_COUNT - 1)
         {
-            cout << ", ";
+            cout << "\n";
         }
     }
-    cout << '\n'
+    cout << setfill('=') << '\n'
+         << right
          << setw(64) << '=' << "\n"
          << endl;
 
     // Reset cout stream
-    cout << dec << setfill(' ');
+    cout << left << dec << setfill(' ');
 }
 
 bool Interface::askIfAgain()
@@ -174,7 +187,7 @@ bool Interface::askIfAgain()
             cout << endl;
             return true;
         }
-        else if (tolower(choice[0] == 'n'))
+        else if (tolower(choice[0]) == 'n')
         {
             cout << endl;
             return false;
