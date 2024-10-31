@@ -6,10 +6,12 @@
 
 using namespace std;
 
+#define MEMORY_COUNT 256
+
 class Memory
 {
 private:
-    array<unsigned char, 256> memory; // 256 memory locations
+    array<unsigned char, MEMORY_COUNT> memory; // 256 memory locations
 
 public:
     Memory();

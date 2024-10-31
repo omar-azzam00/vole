@@ -6,10 +6,12 @@
 
 using namespace std;
 
+#define REGISTERS_COUNT 16
+
 class Registers
 {
 private:
-    array<unsigned char, 16> registers; // 16 registers: R0 to R15
+    array<unsigned char, REGISTERS_COUNT> registers; // 16 registers: R0 to R15
 
 public:
     Registers();
@@ -20,8 +22,8 @@ public:
     // Set the value of a specific register
     void setValue(int index, unsigned char value);
 
-    // Print all registers
-    void printRegisters() const;
+    // // Print all registers
+    // void printRegisters() const;
 };
 
 #endif // REGISTER_H
