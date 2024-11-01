@@ -37,18 +37,17 @@ string Machine::loadProgram(string &instructionsStr)
     int instructionsCount = 0;
     stringstream ss(instructionsStr);
     string instruction;
-    string errorMsg = "";
 
     while (ss >> instruction)
     {
         if (instructionsCount == 128)
         {
-            errorMsg = "The maximum number of instructions is 128.";
+            return "The maximum number of instructions is 128.";
         }
 
-        if (instruction.length() > 4)
+        if (instruction.length() != 4)
         {
-            errorMsg = "Instruction \"" + instruction + "\"" + " is too long, it should be 4 characters long only!";
+            return "Instruction \"" + instruction + "\" should be 4 characters long.";
         }
         char opCode = tolower(instruction[0]);
         char reg1Addr;
@@ -66,17 +65,17 @@ string Machine::loadProgram(string &instructionsStr)
             memAddr = instruction.substr(2);
             if (!isxdigit(reg1Addr))
             {
-                errorMsg = string("Invalid Register Address ") + '"' + reg1Addr + '"' + " in the instruction \"" + instruction + "\"";
+                return string("Invalid Register Address ") + '"' + reg1Addr + '"' + " in the instruction \"" + instruction + "\"";
             }
             if (!isxdigit(memAddr[0]) || !isxdigit(memAddr[1]))
             {
-                errorMsg = string("Invalid Memory address ") + '"' + memAddr + '"' + " in the instruction \"" + instruction + "\"";
+                return string("Invalid Memory address ") + '"' + memAddr + '"' + " in the instruction \"" + instruction + "\"";
             }
             break;
         case '4':
             if (instruction[1] != '0')
             {
-                errorMsg = string("Invalid Instruction ") + "\"" + instruction + "\"";
+                return string("Invalid Instruction ") + "\"" + instruction + "\"";
             }
 
             reg1Addr = instruction[2];
@@ -84,11 +83,11 @@ string Machine::loadProgram(string &instructionsStr)
 
             if (!isxdigit(reg1Addr))
             {
-                errorMsg = string("Invalid Register Address ") + '"' + reg1Addr + '"' + " in the instruction \"" + instruction + "\"";
+                return string("Invalid Register Address ") + '"' + reg1Addr + '"' + " in the instruction \"" + instruction + "\"";
             }
             if (!isxdigit(reg2Addr))
             {
-                errorMsg = string("Invalid Register Address ") + '"' + reg2Addr + '"' + " in the instruction \"" + instruction + "\"";
+                return string("Invalid Register Address ") + '"' + reg2Addr + '"' + " in the instruction \"" + instruction + "\"";
             }
             break;
         case '5':
@@ -98,31 +97,26 @@ string Machine::loadProgram(string &instructionsStr)
             reg3Addr = instruction[3];
             if (!isxdigit(reg1Addr))
             {
-                errorMsg = string("Invalid Register Address ") + '"' + reg1Addr + '"' + " in the instruction \"" + instruction + "\"";
+                return string("Invalid Register Address ") + '"' + reg1Addr + '"' + " in the instruction \"" + instruction + "\"";
             }
             if (!isxdigit(reg2Addr))
             {
-                errorMsg = string("Invalid Register Address ") + '"' + reg2Addr + '"' + " in the instruction \"" + instruction + "\"";
+                return string("Invalid Register Address ") + '"' + reg2Addr + '"' + " in the instruction \"" + instruction + "\"";
             }
             if (!isxdigit(reg3Addr))
             {
-                errorMsg = string("Invalid Register Address ") + '"' + reg3Addr + '"' + " in the instruction \"" + instruction + "\"";
+                return string("Invalid Register Address ") + '"' + reg3Addr + '"' + " in the instruction \"" + instruction + "\"";
             }
             break;
         case 'c':
             if (instruction[1] != '0' || instruction[2] != '0' || instruction[3] != '0')
             {
-                errorMsg = string("Invalid Instruction ") + "\"" + instruction + "\"";
+                return string("Invalid Instruction ") + "\"" + instruction + "\"";
             }
             break;
         default:
-            errorMsg = string("Undefined Op-Code ") + '"' + opCode + '"' + " in the instruction \"" + instruction + "\"";
+            return string("Undefined Op-Code ") + '"' + opCode + '"' + " in the instruction \"" + instruction + "\"";
             break;
-        }
-
-        if (errorMsg != "")
-        {
-            return errorMsg;
         }
 
         stringstream instructionSS(instruction);
@@ -137,5 +131,5 @@ string Machine::loadProgram(string &instructionsStr)
         instructionsCount++;
     }
 
-    return errorMsg;
+    return "";
 }
