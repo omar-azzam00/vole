@@ -14,13 +14,8 @@ void Machine::runMachine()
         string instructionsStr = interface.readFile();
         string errorMsg = loadProgram(instructionsStr);
 
-        if (errorMsg != "")
-        {
-            cout << "Error in loading the program!\n"
-                 << errorMsg << "\n"
-                 << endl;
-        }
-        else
+        // errorMsg == "", means that there is no errors.
+        if (errorMsg == "")
         {
             string screenOutput = "";
 
@@ -28,6 +23,12 @@ void Machine::runMachine()
             {
                 interface.writeOutput(screenOutput, PC, IR, registers, memory);
             }
+        }
+        else
+        {
+            cout << "Error in loading the program!\n"
+                 << errorMsg << "\n"
+                 << endl;
         }
 
         if (!interface.askIfAgain())
