@@ -147,9 +147,3 @@ bool Interface::askIfAgain()
         }
     }
 }
-
-void Interface::sayDone()
-{
-    cout << "Everything is done successfully!\n"
-         << endl;
-}

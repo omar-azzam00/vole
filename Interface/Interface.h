@@ -14,7 +14,6 @@ public:
     string readFile();
     bool askIfWrite();
     void writeOutput(string &screenOutput, u_int8_t &PC, u_int16_t &IR, Registers &registers, Memory &memory);
-    void sayDone();
     bool askIfAgain();
 };
 
