@@ -9,7 +9,7 @@ using namespace std;
 
 void Interface::showBanner()
 {
-    cout << "This is a simulation of Vole machine\n"
+    cout << "This is a simulation of Vole machine.\n"
          << endl;
 }
 
@@ -45,7 +45,7 @@ string Interface::readFile()
 
 bool Interface::askIfWrite()
 {
-    cout << "Do you want to see screen output and machine status of this program ?\n";
+    cout << "Do you want to see screen output and machine status ?\n";
 
     while (true)
     {
@@ -65,7 +65,7 @@ bool Interface::askIfWrite()
         }
         else
         {
-            cout << "Invalid input, try again!\n";
+            cout << "Invalid input, please try again!\n";
         }
     }
 }
@@ -143,7 +143,7 @@ bool Interface::askIfAgain()
         }
         else
         {
-            cout << "Invalid input, try again!\n";
+            cout << "Invalid input, please try again!\n";
         }
     }
 }
