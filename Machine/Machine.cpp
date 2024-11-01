@@ -4,7 +4,9 @@
 
 using namespace std;
 
-Machine::Machine() {}
+Machine::Machine() : executor(PC, IR, registers, memory)
+{
+}
 
 void Machine::runMachine()
 {
@@ -24,6 +26,16 @@ void Machine::runMachine()
         }
 
         string screenOutput = "";
+        executor.executeProgram(screenOutput);
+        if (screenOutput.length() != 0 && screenOutput.back() != '\n')
+        {
+            cout << '\n'
+                 << endl;
+        }
+        else if (screenOutput.length() != 0 && screenOutput.back() == '\n')
+        {
+            cout << endl;
+        }
 
         if (interface.askIfWrite())
         {
