@@ -22,6 +22,7 @@ private:
 public:
     Machine();
     void runMachine();
+    string loadProgram(string &instructionsStr);
 };
 
 #endif // _MACHINE_H
