@@ -30,7 +30,6 @@ void Machine::runMachine()
         if (interface.askIfWrite())
         {
             interface.writeOutput(screenOutput, PC, IR, registers, memory);
-            interface.sayDone();
         }
 
         if (!interface.askIfAgain())
