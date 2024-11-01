@@ -15,31 +15,31 @@ void Interface::showBanner()
 
 string Interface::readFile()
 {
-    ifstream infile;
-    string instruction = "";
-    string filename;
+    ifstream file;
+    string fileContent = "";
+    string fileName;
 
     while (true)
     {
         cout << "Enter the name of the instructions file: ";
-        getline(cin, filename);
+        getline(cin, fileName);
 
-        infile.open(filename);
-        if (!infile)
+        file.open(fileName);
+        if (!file)
         {
             cout << "This file can't be opened, please try again!\n";
             continue;
         }
 
-        char c;
-        while (infile.get(c))
+        char ch;
+        while (file.get(ch))
         {
-            instruction += c;
+            fileContent += ch;
         }
 
-        infile.close();
+        file.close();
         cout << endl;
-        return instruction;
+        return fileContent;
     }
 }
 
