@@ -7,38 +7,6 @@
 
 using namespace std;
 
-// void Interface::menu()
-// {
-//     showBanner();
-//     string c;
-//     cout << "1)" << "Load a file of instructions" << endl;
-//     cout << "2)" << "Showing the status and execution process" << endl;
-//     cout << "3)" << "Exit" << endl;
-
-//     cout << "Choose an option: "; // Omar: Propmt the user to enter input.
-
-//     // cin >> c;
-//     getline(cin, c); // Omar: getline is better because user might enter space seperated content.
-
-//     if (c == "1")
-//     {
-//         return 1;
-//     }
-//     else if (c == "2")
-//     {
-//         writeOutput();
-//         sayDone();
-//     }
-//     else if (c == "3")
-//     {
-//         exit(0);
-//     }
-//     else
-//     {
-//         cout << "Invalid input, try again!" << endl;
-//     }
-// }
-
 void Interface::showBanner()
 {
     cout << "This is a simulation of Vole machine\n"
