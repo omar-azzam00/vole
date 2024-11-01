@@ -53,43 +53,24 @@ string Interface::readFile()
 
     while (true)
     {
-
         cout << "Enter the name of the instructions file: ";
-
-        // cin >> filename;
         getline(cin, filename);
-        // Omar: getline is better because user might enter space seperated text.
 
         infile.open(filename);
-
         if (!infile)
         {
             cout << "This file can't be opened, please try again!\n";
             continue;
         }
 
-        cout << endl;
-
-        // string line;
-
-        // while (getline(infile, line))
-        // {
-        //     instruction += line;
-        // }
-
-        // Omar: The previous while loop will not add new line characters to the string.
         char c;
-
         while (infile.get(c))
         {
             instruction += c;
         }
 
-        // Omar: we don't want to print the instructions we read.
-        // cout << instruction;
-
         infile.close();
-
+        cout << endl;
         return instruction;
     }
 }
