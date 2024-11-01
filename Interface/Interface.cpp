@@ -131,12 +131,12 @@ bool Interface::askIfAgain()
         string choice;
         getline(cin, choice);
 
-        if (tolower(choice[0]) == 'y')
+        if (choice.length() == 1 && tolower(choice[0]) == 'y')
         {
             cout << endl;
             return true;
         }
-        else if (tolower(choice[0]) == 'n')
+        else if (choice.length() == 1 && tolower(choice[0]) == 'n')
         {
             cout << endl;
             return false;
