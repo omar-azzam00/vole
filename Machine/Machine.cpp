@@ -19,14 +19,15 @@ void Machine::runMachine()
             cout << "Error in loading the program!\n"
                  << errorMsg << "\n"
                  << endl;
-            break;
         }
-
-        string screenOutput = "";
-
-        if (interface.askIfWrite())
+        else
         {
-            interface.writeOutput(screenOutput, PC, IR, registers, memory);
+            string screenOutput = "";
+
+            if (interface.askIfWrite())
+            {
+                interface.writeOutput(screenOutput, PC, IR, registers, memory);
+            }
         }
 
         if (!interface.askIfAgain())
