@@ -19,10 +19,12 @@ private:
     Executor executor;
     Interface interface;
 
+private:
+    string loadProgram(string &instructionsStr);
+
 public:
     Machine();
     void runMachine();
-    string loadProgram(string &instructionsStr);
 };
 
 #endif // _MACHINE_H
