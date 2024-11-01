@@ -9,33 +9,27 @@ Machine::Machine() {}
 void Machine::runMachine()
 {
     interface.showBanner();
-    while (true)
+
+    do
     {
         string instructionsStr = interface.readFile();
         string errorMsg = loadProgram(instructionsStr);
 
-        // errorMsg == "", means that there is no errors.
-        if (errorMsg == "")
-        {
-            string screenOutput = "";
-
-            if (interface.askIfWrite())
-            {
-                interface.writeOutput(screenOutput, PC, IR, registers, memory);
-            }
-        }
-        else
+        if (errorMsg != "")
         {
             cout << "Error in loading the program!\n"
                  << errorMsg << "\n"
                  << endl;
+            continue;
         }
 
-        if (!interface.askIfAgain())
+        string screenOutput = "";
+
+        if (interface.askIfWrite())
         {
-            break;
+            interface.writeOutput(screenOutput, PC, IR, registers, memory);
         }
-    }
+    } while (interface.askIfAgain());
 }
 
 string Machine::loadProgram(string &instructionsStr)
