@@ -7,13 +7,6 @@
 
 using namespace std;
 
-enum class Option
-{
-    ReadFile,
-    WriteOutput,
-
-};
-
 class Interface
 {
 public:
