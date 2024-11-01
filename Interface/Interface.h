@@ -10,7 +10,6 @@ using namespace std;
 class Interface
 {
 public:
-    // void menu();
     void showBanner();
     string readFile();
     bool askIfWrite();
