@@ -48,7 +48,7 @@ string Machine::loadProgram(string &instructionsStr)
     {
         if (instructionsCount == 128)
         {
-            errorMsg = "The program size is too big, the maximum number of instructions is 128.";
+            errorMsg = "The maximum number of instructions is 128.";
         }
 
         if (instruction.length() > 4)
