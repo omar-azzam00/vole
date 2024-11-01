@@ -23,8 +23,6 @@ void Machine::runMachine()
             break;
         }
 
-        cout << instructionsCount;
-
         // Execute
         string screenOutput = "";
 
@@ -44,7 +42,7 @@ void Machine::runMachine()
 
 string Machine::loadProgram(string &instructionsStr)
 {
-    // check if instructionStr is valid;
+    int instructionsCount = 0;
     stringstream ss(instructionsStr);
     string instruction;
     string errorMsg = "";
