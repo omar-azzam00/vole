@@ -11,7 +11,6 @@ void Machine::runMachine()
     interface.showBanner();
     while (true)
     {
-        // Fetch, Decode
         string instructionsStr = interface.readFile();
         string errorMsg = loadProgram(instructionsStr);
 
@@ -23,10 +22,8 @@ void Machine::runMachine()
             break;
         }
 
-        // Execute
         string screenOutput = "";
 
-        // After Run
         if (interface.askIfWrite())
         {
             interface.writeOutput(screenOutput, PC, IR, registers, memory);
