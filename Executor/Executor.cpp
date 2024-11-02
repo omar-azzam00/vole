@@ -1,3 +1,4 @@
+#include <cmath>
 #include "../Executor/Executor.h"
 
 Executor::Executor(u_int8_t &_PC,
@@ -33,7 +34,7 @@ u_int8_t Executor::getFouth4Bits()
 
 bool Executor::executeInstruction()
 {
-    u_int8_t data;
+    u_int8_t data, data2, result;
 
     IR = (memory.getValue(PC) << 8) + memory.getValue(PC + 1);
 
@@ -69,10 +70,51 @@ bool Executor::executeInstruction()
         break;
     case 5:
         data = registers.getValue(getThird4Bits()) + registers.getValue(getFouth4Bits());
-        registers.setValue(getSecond4Bits(), data);
+        data2 = registers.getValue(getFouth4Bits());
+        registers.setValue(getSecond4Bits(), result);
         break;
     case 6:
-        break;
+        // data = registers.getValue(getThird4Bits());
+        // data2 = registers.getValue(getFouth4Bits());
+        // int sign1 = getSign(data), exponent1 = getExponent(data), mantisa1 = getMantisa(data),
+        //     sign2 = getSign(data2), exponent2 = getExponent(data2), mantisa2 = getMantisa(data2),
+        //     resultSign, resultExponent, resultMantisa;
+
+        // if (exponent1 >= exponent2)
+        // {
+        //     mantisa2 = mantisa2 >> (exponent1 - exponent2);
+        //     exponent2 = exponent1;
+        //     resultExponent = exponent1;
+        // }
+        // else
+        // {
+        //     mantisa1 = mantisa1 >> (exponent2 - exponent1);
+        //     exponent1 = exponent2;
+        //     resultExponent = exponent1;
+        // }
+
+        // if (sign1 == sign2)
+        // {
+        //     resultMantisa = mantisa1 + mantisa2;
+        //     resultSign = sign1;
+        // }
+        // else
+        // {
+        //     if (mantisa1 > mantisa2)
+        //     {
+
+        //         resultMantisa = mantisa1 - mantisa2;
+        //         resultSign = sign1;
+        //     }
+        //     else
+        //     {
+        //         resultMantisa = mantisa2 - mantisa1;
+        //         resultSign = sign2;
+        //     }
+        // }
+
+        // registers.setValue(getSecond4Bits(), (resultSign << 7) + (resultExponent << 4) + resultMantisa);
+        // break;
     case 0xb:
         if (registers.getValue(0) == registers.getValue(getSecond4Bits()))
         {
@@ -110,4 +152,19 @@ void Executor::executeProgram(string &_screenOutput)
     {
     }
     cerr << dec;
+}
+
+u_int8_t Executor::getSign(u_int8_t byte)
+{
+    return byte >> 7;
+}
+
+u_int8_t Executor::getExponent(u_int8_t byte)
+{
+    return (u_int8_t(byte << 1) >> 5) - 8;
+}
+
+u_int8_t Executor::getMantisa(u_int8_t byte)
+{
+    return u_int8_t(byte << 4) >> 4;
 }

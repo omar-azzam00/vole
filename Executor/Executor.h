@@ -20,6 +20,11 @@ private:
     u_int8_t getSecond4Bits();
     u_int8_t getThird4Bits();
     u_int8_t getFouth4Bits();
+
+    u_int8_t getSign(u_int8_t byte);
+    u_int8_t getExponent(u_int8_t byte);
+    u_int8_t getMantisa(u_int8_t byte);
+
     bool executeInstruction();
 
 public:
