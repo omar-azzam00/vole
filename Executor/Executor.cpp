@@ -70,8 +70,7 @@ bool Executor::executeInstruction()
         break;
     case 5:
         data = registers.getValue(getThird4Bits()) + registers.getValue(getFouth4Bits());
-        data2 = registers.getValue(getFouth4Bits());
-        registers.setValue(getSecond4Bits(), result);
+        registers.setValue(getSecond4Bits(), data);
         break;
     case 6:
         // data = registers.getValue(getThird4Bits());
@@ -114,7 +113,7 @@ bool Executor::executeInstruction()
         // }
 
         // registers.setValue(getSecond4Bits(), (resultSign << 7) + (resultExponent << 4) + resultMantisa);
-        // break;
+        break;
     case 0xb:
         if (registers.getValue(0) == registers.getValue(getSecond4Bits()))
         {

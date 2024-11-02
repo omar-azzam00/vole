@@ -8,45 +8,47 @@ Machine::Machine() : executor(PC, IR, registers, memory)
 {
 }
 
-void Machine::runMachine()
+void Machine::showBanner()
 {
     interface.showBanner();
+}
+bool Machine::runMachine()
+{
+    string instructionsStr = interface.readFile();
+    string errorMsg = loadProgram(instructionsStr);
 
-    do
+    if (errorMsg != "")
     {
-        string instructionsStr = interface.readFile();
-        string errorMsg = loadProgram(instructionsStr);
+        cout << "Error in loading the program!\n"
+             << errorMsg << "\n"
+             << endl;
 
-        if (errorMsg != "")
-        {
-            cout << "Error in loading the program!\n"
-                 << errorMsg << "\n"
-                 << endl;
-            continue;
-        }
+        return interface.askIfAgain();
+    }
 
-        string screenOutput = "";
-        executor.executeProgram(screenOutput);
-        if (screenOutput.length() != 0 && screenOutput.back() != '\n')
-        {
-            cout << '\n'
-                 << endl;
-        }
-        else if (screenOutput.length() != 0 && screenOutput.back() == '\n')
-        {
-            cout << endl;
-        }
+    string screenOutput = "";
+    executor.executeProgram(screenOutput);
+    if (screenOutput.length() != 0 && screenOutput.back() != '\n')
+    {
+        cout << '\n'
+             << endl;
+    }
+    else if (screenOutput.length() != 0 && screenOutput.back() == '\n')
+    {
+        cout << endl;
+    }
 
-        if (interface.askIfWrite())
-        {
-            interface.writeOutput(screenOutput, PC, IR, registers, memory);
-        }
-    } while (interface.askIfAgain());
+    if (interface.askIfWrite())
+    {
+        interface.writeOutput(screenOutput, PC, IR, registers, memory);
+    }
+
+    return interface.askIfAgain();
 }
 
 string Machine::loadProgram(string &instructionsStr)
 {
-    int instructionsCount = 0;
+    int instructionsCount = 5;
     stringstream ss(instructionsStr);
     string instruction;
 

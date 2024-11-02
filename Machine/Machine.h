@@ -12,7 +12,7 @@ using namespace std;
 class Machine
 {
 private:
-    u_int8_t PC = 0;
+    u_int8_t PC = 0x0A;
     u_int16_t IR;
     Registers registers;
     Memory memory;
@@ -24,7 +24,8 @@ private:
 
 public:
     Machine();
-    void runMachine();
+    void showBanner();
+    bool runMachine();
 };
 
 #endif // _MACHINE_H
