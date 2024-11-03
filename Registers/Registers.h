@@ -22,9 +22,6 @@ public:
 
     // Set the value of a specific register
     void setValue(int index, unsigned char value);
-
-    // // Print all registers
-    // void printRegisters() const;
 };
 
 #endif // REGISTER_H
