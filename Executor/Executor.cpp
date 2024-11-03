@@ -1,8 +1,8 @@
 #include <cmath>
-#include "../Executor/Executor.h"
+#include "Executor.h"
 
-Executor::Executor(u_int8_t &_PC,
-                   u_int16_t &_IR,
+Executor::Executor(uint8_t &_PC,
+                   uint16_t &_IR,
                    Registers &_registers,
                    Memory &_memory) : PC(_PC),
                                       IR(_IR),
@@ -11,30 +11,30 @@ Executor::Executor(u_int8_t &_PC,
 {
 }
 
-u_int8_t Executor::getSecondByte()
+uint8_t Executor::getSecondByte()
 {
     return IR;
 }
-u_int8_t Executor::getFirst4Bits()
+uint8_t Executor::getFirst4Bits()
 {
     return IR >> 12;
 }
-u_int8_t Executor::getSecond4Bits()
+uint8_t Executor::getSecond4Bits()
 {
-    return (u_int16_t)(IR << 4) >> 12;
+    return (uint16_t)(IR << 4) >> 12;
 }
-u_int8_t Executor::getThird4Bits()
+uint8_t Executor::getThird4Bits()
 {
-    return (u_int16_t)(IR << 8) >> 12;
+    return (uint16_t)(IR << 8) >> 12;
 }
-u_int8_t Executor::getFouth4Bits()
+uint8_t Executor::getFouth4Bits()
 {
-    return (u_int16_t)(IR << 12) >> 12;
+    return (uint16_t)(IR << 12) >> 12;
 }
 
 bool Executor::executeInstruction()
 {
-    u_int8_t data, data2, result;
+    uint8_t data, data2, result;
 
     IR = (memory.getValue(PC) << 8) + memory.getValue(PC + 1);
 
@@ -153,17 +153,17 @@ void Executor::executeProgram(string &_screenOutput)
     cerr << dec;
 }
 
-u_int8_t Executor::getSign(u_int8_t byte)
+uint8_t Executor::getSign(uint8_t byte)
 {
     return byte >> 7;
 }
 
-u_int8_t Executor::getExponent(u_int8_t byte)
+uint8_t Executor::getExponent(uint8_t byte)
 {
-    return (u_int8_t(byte << 1) >> 5) - 8;
+    return (uint8_t(byte << 1) >> 5) - 8;
 }
 
-u_int8_t Executor::getMantisa(u_int8_t byte)
+uint8_t Executor::getMantisa(uint8_t byte)
 {
-    return u_int8_t(byte << 4) >> 4;
+    return uint8_t(byte << 4) >> 4;
 }

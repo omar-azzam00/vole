@@ -134,11 +134,11 @@ string Machine::loadProgram(string &instructionsStr)
         }
 
         stringstream instructionSS(instruction);
-        u_int16_t encodedInstruction;
+        uint16_t encodedInstruction;
 
         instructionSS >> hex >> encodedInstruction;
-        u_int8_t rightSide = encodedInstruction;
-        u_int8_t leftSide = encodedInstruction >> 8;
+        uint8_t rightSide = encodedInstruction;
+        uint8_t leftSide = encodedInstruction >> 8;
         memory.setValue(instructionsCount * 2, leftSide);
         memory.setValue(instructionsCount * 2 + 1, rightSide);
 

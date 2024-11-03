@@ -70,7 +70,7 @@ bool Interface::askIfWrite()
     }
 }
 
-void Interface::writeOutput(string &screenOutput, u_int8_t &PC, u_int16_t &IR, Registers &registers, Memory &memory)
+void Interface::writeOutput(string &screenOutput, uint8_t &PC, uint16_t &IR, Registers &registers, Memory &memory)
 {
     cout << setfill('=');
 
